@@ -1,0 +1,15 @@
+@ServiceBusQueues_HostAddress = http://localhost:5221
+
+GET {{ServiceBusQueues_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+POST {{ServiceBusQueues_HostAddress}}/weatherforecast/
+Content-Type: application/json
+Accept: application/json
+
+{
+  "date": "2024-10-10",
+  "temperatureC": 12,
+  "summary": "scheduled"
+}
