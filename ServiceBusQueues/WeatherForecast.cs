@@ -10,4 +10,11 @@ namespace ServiceBusQueues
 
         public string? Summary { get; set; }
     }
+
+    public class WeatherForecastAdded
+    {
+        public Guid Id { get; set; }
+        public DateOnly ForDate { get; set; }
+        public DateTime CreatedDateTime { get; set; }
+    }
 }

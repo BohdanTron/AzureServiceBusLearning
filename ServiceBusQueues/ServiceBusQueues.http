@@ -4,7 +4,7 @@ GET {{ServiceBusQueues_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
-POST {{ServiceBusQueues_HostAddress}}/weatherforecast/
+POST {{ServiceBusQueues_HostAddress}}/weatherforecast/queue
 Content-Type: application/json
 Accept: application/json
 
@@ -12,4 +12,15 @@ Accept: application/json
   "date": "2024-10-10",
   "temperatureC": 12,
   "summary": "scheduled"
+}
+
+###
+POST {{ServiceBusQueues_HostAddress}}/weatherforecast/topic
+Content-Type: application/json
+Accept: application/json
+
+{
+  "date": "2024-10-10",
+  "temperatureC": 12,
+  "summary": "It's cold"
 }

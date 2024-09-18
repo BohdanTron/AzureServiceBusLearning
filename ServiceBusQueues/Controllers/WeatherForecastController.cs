@@ -36,8 +36,8 @@ namespace ServiceBusQueues.Controllers
             .ToArray();
         }
 
-        [HttpPost]
-        public async Task Post(WeatherForecast data)
+        [HttpPost("queue")]
+        public async Task Queue(WeatherForecast data)
         {
             var sender = _serviceBusClient.CreateSender("add-weather-data");
 
@@ -47,6 +47,24 @@ namespace ServiceBusQueues.Controllers
                 message.ScheduledEnqueueTime = DateTimeOffset.UtcNow.AddSeconds(10);
 
             await sender.SendMessageAsync(message);
+        }
+
+        [HttpPost("topic")]
+        public async Task Topic(WeatherForecast data)
+        {
+            // Assume we write it to a database
+            var message = new WeatherForecastAdded
+            {
+                Id = Guid.NewGuid(),
+                ForDate = data.Date,
+                CreatedDateTime = DateTime.UtcNow
+            };
+
+            var sender = _serviceBusClient.CreateSender("weather-forecast-added");
+
+            var serviceBusMessage = new ServiceBusMessage(JsonSerializer.Serialize(message));
+
+            await sender.SendMessageAsync(serviceBusMessage);
         }
     }
 }
